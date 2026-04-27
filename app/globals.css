@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@config "../tailwind.config.js";
+
 @theme {
   /* Brand Colors - BlockDAG Inspired */
   --color-primary: #eb06f9;

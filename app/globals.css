@@ -1,9 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@config "../tailwind.config.js";
-
-@theme {
-  /* Brand Colors - BlockDAG Inspired */
+:root {
   --color-primary: #eb06f9;
   --color-secondary: #2D9CDB;
   --color-accent: #00ff88;
@@ -13,44 +12,17 @@
   --color-text: #eaf2ff;
   --color-muted: #7a9bb5;
 
-  /* Font Families */
-  --font-display: var(--font-display), "Syne", sans-serif;
-  --font-body: var(--font-body), "DM Sans", sans-serif;
-
-  /* Custom Animations */
-  --animate-shimmer: shimmer 3s linear infinite;
-  --animate-marquee: marquee 22s linear infinite;
-  --animate-glow: glow 3s ease-in-out infinite;
-  --animate-float: float 6s ease-in-out infinite;
-
-  @keyframes shimmer {
-    0% { background-position: 0% }
-    100% { background-position: 200% }
-  }
-  @keyframes marquee {
-    0% { transform: translateX(0) }
-    100% { transform: translateX(-50%) }
-  }
-  @keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(235, 6, 249, 0.3) }
-    50% { box-shadow: 0 0 60px rgba(235, 6, 249, 0.7) }
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0) }
-    50% { transform: translateY(-20px) }
-  }
+  --bg: #050a0e;
+  --bg2: #0a1520;
+  --bg3: #0f1e2e;
+  --primary: #eb06f9;
+  --secondary: #2D9CDB;
+  --accent: #00ff88;
+  --text: #eaf2ff;
+  --muted: #7a9bb5;
 }
 
-/* Base Styles & Modern Reset */
 @layer base {
-  :root {
-    --primary: #eb06f9;
-    --secondary: #2D9CDB;
-    --accent: #00ff88;
-    --bg: #050a0e;
-    --text: #eaf2ff;
-  }
-
   * {
     @apply border-white/10;
   }
@@ -61,11 +33,10 @@
   }
 
   body {
-    @apply bg-bg text-text font-body antialiased selection:bg-primary/30 selection:text-white;
+    @apply bg-bg text-text antialiased selection:bg-primary/30 selection:text-white;
     min-height: 100vh;
   }
 
-  /* Deep space background effect */
   body::before {
     content: '';
     position: fixed;
@@ -75,13 +46,8 @@
                 radial-gradient(circle at 100% 100%, rgba(45,156,219,0.05) 0%, transparent 50%);
     pointer-events: none;
   }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight;
-  }
 }
 
-/* Glassmorphism & Modern UI Utilities */
 @layer components {
   .glass {
     @apply bg-bg2/60 backdrop-blur-xl border border-white/10;
@@ -94,9 +60,36 @@
   .text-glow {
     text-shadow: 0 0 20px rgba(235,6,249,0.4);
   }
-
-  .bg-shimmer {
-    background: linear-gradient(90deg, #eb06f9, #2D9CDB, #eb06f9);
-    background-size: 200% auto;
-  }
 }
+
+/* Animations */
+@keyframes shimmer {
+  0% { background-position: 0% }
+  100% { background-position: 200% }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0) }
+  100% { transform: translateX(-50%) }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(235, 6, 249, 0.3) }
+  50% { box-shadow: 0 0 60px rgba(235, 6, 249, 0.7) }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-20px) }
+}
+
+.animate-shimmer { animation: shimmer 3s linear infinite; }
+.animate-marquee { animation: marquee 22s linear infinite; }
+.animate-fadeInUp { animation: fadeInUp 0.6s ease forwards; }
+.animate-glow { animation: glow 3s ease-in-out infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }

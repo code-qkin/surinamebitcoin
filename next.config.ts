@@ -1,7 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
+  // CRITICAL: This ensures all scripts and styles load correctly 
+  // from the WordPress theme folder.
+  assetPrefix: '/wp-content/themes/sbc-theme/',
+}
 
-export default nextConfig;
+export default nextConfig

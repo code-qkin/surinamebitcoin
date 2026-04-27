@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Brand Colors - BlockDAG Inspired */
+  --color-primary: #eb06f9;
+  --color-secondary: #2D9CDB;
+  --color-accent: #00ff88;
+  --color-bg: #050a0e;
+  --color-bg2: #0a1520;
+  --color-bg3: #0f1e2e;
+  --color-text: #eaf2ff;
+  --color-muted: #7a9bb5;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Font Families */
+  --font-display: var(--font-display), "Syne", sans-serif;
+  --font-body: var(--font-body), "DM Sans", sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Custom Animations */
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-marquee: marquee 22s linear infinite;
+  --animate-glow: glow 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes shimmer {
+    0% { background-position: 0% }
+    100% { background-position: 200% }
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0) }
+    100% { transform: translateX(-50%) }
+  }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(235, 6, 249, 0.3) }
+    50% { box-shadow: 0 0 60px rgba(235, 6, 249, 0.7) }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) }
+    50% { transform: translateY(-20px) }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Base Styles & Modern Reset */
+@layer base {
+  :root {
+    --primary: #eb06f9;
+    --secondary: #2D9CDB;
+    --accent: #00ff88;
+    --bg: #050a0e;
+    --text: #eaf2ff;
+  }
+
+  * {
+    @apply border-white/10;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    @apply bg-bg text-text;
+  }
+
+  body {
+    @apply bg-bg text-text font-body antialiased selection:bg-primary/30 selection:text-white;
+    min-height: 100vh;
+  }
+
+  /* Deep space background effect */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at 50% 0%, rgba(235,6,249,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(45,156,219,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+/* Glassmorphism & Modern UI Utilities */
+@layer components {
+  .glass {
+    @apply bg-bg2/60 backdrop-blur-xl border border-white/10;
+  }
+  
+  .glass-card {
+    @apply bg-[#0a1520]/80 backdrop-blur-md border border-white/5 shadow-2xl transition-all duration-300;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(235,6,249,0.4);
+  }
+
+  .bg-shimmer {
+    background: linear-gradient(90deg, #eb06f9, #2D9CDB, #eb06f9);
+    background-size: 200% auto;
+  }
 }

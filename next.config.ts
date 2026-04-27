@@ -6,9 +6,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // CRITICAL: This ensures all scripts and styles load correctly 
-  // from the WordPress theme folder.
-  assetPrefix: '/wp-content/themes/sbc-theme/',
+  // If we are building for WordPress, use the theme path. 
+  // Otherwise, use the standard root path.
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/wp-content/themes/sbc-theme/' : '',
 }
 
 export default nextConfig

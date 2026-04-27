@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:wp": "next build",
+    "build:wp": "set BUILD_FOR_WP=true && next build",
     "start": "next start",
     "lint": "eslint"
   },

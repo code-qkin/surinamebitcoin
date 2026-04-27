@@ -6,9 +6,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // If we are building for WordPress, use the theme path. 
-  // Otherwise, use the standard root path.
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/wp-content/themes/sbc-theme/' : '',
+  // We only use the WordPress prefix if we explicitly set BUILD_FOR_WP=true
+  assetPrefix: process.env.BUILD_FOR_WP === 'true' ? '/wp-content/themes/sbc-theme/' : '',
 }
 
 export default nextConfig
